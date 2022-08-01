@@ -88,12 +88,37 @@ function App() {
 		setTasks({...tasks});
 	}
 
+	function changeTodolistTitle(tlId: string, newTitle: string) {
+		const todolist = todolists.find(item => item.id === tlId);
+
+		if (todolist) {
+			todolist.title = newTitle;
+			setTodolists([...todolists])
+		}
+	}
+
 	function changeStatus(taskId: string, isDone: boolean, tlId: string) {
+		// Достаём нужный массив по todolistId
 		let currentTasks = tasks[tlId];
+		// Найдём нужную таску
 		let task = currentTasks.find(item => item.id !== tlId);
 
+		// Изменим таску, если она нашлась
 		if (task) {
 			task.isDone = isDone;
+			setTasks({...tasks});
+		}
+	}
+
+	function changeTaskTitle(taskId: string, newTitle: string, tlId: string) {
+		// Достаём нужный массив по todolistId
+		let currentTasks = tasks[tlId];
+		// Найдём нужную таску
+		let task = currentTasks.find(item => item.id !== tlId);
+
+		// Изменим таску, если она нашлась
+		if (task) {
+			task.title = newTitle;
 			setTasks({...tasks});
 		}
 	}
@@ -161,8 +186,10 @@ function App() {
 						changeFilter={changeFilter}
 						addTask={addTask}
 						changeStatus={changeStatus}
+						changeTaskTitle={changeTaskTitle}
 						filter={item.filter}
 						removeTodolist={removeTodolist}
+						changeTodolistTitle={changeTodolistTitle}
 					/>
 				})
 			}
