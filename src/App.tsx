@@ -98,16 +98,10 @@ function App() {
 	}
 
 	function changeStatus(taskId: string, isDone: boolean, tlId: string) {
-		// Достаём нужный массив по todolistId
-		let currentTasks = tasks[tlId];
-		// Найдём нужную таску
-		let task = currentTasks.find(item => item.id !== tlId);
-
-		// Изменим таску, если она нашлась
-		if (task) {
-			task.isDone = isDone;
-			setTasks({...tasks});
-		}
+		setTasks({
+			...tasks,
+			[tlId]: tasks[tlId].map(item => item.id === taskId ? {...item, isDone} : item)
+		})
 	}
 
 	function changeTaskTitle(taskId: string, newTitle: string, tlId: string) {
