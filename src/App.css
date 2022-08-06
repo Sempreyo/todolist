@@ -1,9 +1,10 @@
-.error {
-	border: 1px solid red;
+ul {
+	list-style: none;
+	padding: 0;
 }
 
-.error-message {
-	color: red;
+h3 {
+	margin: 0;
 }
 
 .active-filter {
